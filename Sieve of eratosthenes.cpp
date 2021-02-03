@@ -4,7 +4,7 @@ void Sieve(ll n)
 {
 	prime.assign(n + 5, 1);
 	prime[1] = false;
-	for (ll i = 2; i * i<= n; i++)
+	for (ll i = 2; i<= n; i++)
 	{
 		if (prime[i])
 		{
