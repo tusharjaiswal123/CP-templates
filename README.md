@@ -8,3 +8,4 @@
 
 ## Segment Tree
 - [First](https://github.com/tusharjaiswal123/CP-templates/blob/main/SegmentTree.cpp)
+- [Lazy](https://github.com/tusharjaiswal123/CP-templates/blob/main/lazy_prop.cpp)
