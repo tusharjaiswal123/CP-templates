@@ -1,7 +1,7 @@
 typedef ll item;
 
-// struct item{
-// 	ll a,b;
+// struct item {
+// 	ll seg, pref, suf, sum;
 // };
 
 struct segtree
@@ -9,7 +9,7 @@ struct segtree
 	vector<ll> operations;
 	vector<item> node;
 	ll size;
-	item NEUTRAL_ELEMENT = 0;
+	item NEUTRAL_ELEMENT = {0, 0, 0, 0};
 	ll NO_OPERATION = LLONG_MAX - 1;
 
 
@@ -18,17 +18,45 @@ struct segtree
 		if (b == NO_OPERATION)
 			return a;
 
-		return b * len;
+		a.sum = b * len;
+		if (b > 0)
+		{
+			a.seg = a.pref = a.suf = b * len;
+		}
+		else
+		{
+			a.seg = a.pref = a.suf = 0;
+		}
+
+		return a;
 	}
 
-	item add_op(item a, ll b)
+	item add_op(item a, item b)
 	{
-		return a + b;
+		return {
+			max({a.seg, b.seg, a.suf + b.pref}),
+			max(a.sum + b.pref, a.pref),
+			max(b.suf, b.sum + a.suf),
+			a.sum + b.sum
+		};
 	}
 
 	void apply_mod_op(item &a, ll b, ll len)
 	{
 		a = mul_op(a, b, len);
+	}
+
+	ll on_op(ll a, ll b, ll len)
+	{
+		if (b == NO_OPERATION)
+			return a;
+
+		return b * len;
+	}
+
+	void apply_on_op(ll &a, ll b, ll len)
+	{
+		a = on_op(a, b, len);
 	}
 
 	void propagate(ll i, ll lx, ll rx)
@@ -38,8 +66,8 @@ struct segtree
 
 		ll m = lx + (rx - lx) / 2;
 
-		apply_mod_op(operations[2 * i + 1], operations[i], 1);
-		apply_mod_op(operations[2 * i + 2], operations[i], 1);
+		apply_on_op(operations[2 * i + 1], operations[i], 1LL);
+		apply_on_op(operations[2 * i + 2], operations[i], 1LL);
 		apply_mod_op(node[2 * i + 1], operations[i], m - lx);
 		apply_mod_op(node[2 * i + 2], operations[i], rx - m);
 
@@ -69,7 +97,7 @@ struct segtree
 			size *= 2;
 
 		operations.assign(2 * size, 0);
-		node.assign(2 * size, 0);
+		node.assign(2 * size, NEUTRAL_ELEMENT);
 
 		//build(0, 0, size);
 	}
@@ -106,7 +134,7 @@ struct segtree
 
 		if (lx >= l && rx <= r)
 		{
-			apply_mod_op(operations[i], v, 1);
+			apply_on_op(operations[i], v, 1);
 			apply_mod_op(node[i], v, rx - lx);
 			return;
 		}
