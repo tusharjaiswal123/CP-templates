@@ -9,11 +9,11 @@ struct segtree
 	vector<ll> operations;
 	vector<item> node;
 	ll size;
-	ll NEUTRAL_ELEMENT = 0;
+	item NEUTRAL_ELEMENT = 0;
 	ll NO_OPERATION = LLONG_MAX - 1;
 
 
-	item mul_op(item a, item b, ll len)
+	item mul_op(item a, ll b, ll len)
 	{
 		if (b == NO_OPERATION)
 			return a;
@@ -21,12 +21,12 @@ struct segtree
 		return b * len;
 	}
 
-	item add_op(item a, item b)
+	item add_op(item a, ll b)
 	{
 		return a + b;
 	}
 
-	void apply_mod_op(item &a, item b, ll len)
+	void apply_mod_op(item &a, ll b, ll len)
 	{
 		a = mul_op(a, b, len);
 	}
