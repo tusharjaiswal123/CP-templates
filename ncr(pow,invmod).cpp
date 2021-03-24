@@ -4,7 +4,7 @@ void pre(ll n, ll m)
 	fact.resize(n + 5);
 	fact[0] = 1;
 
-	for (ll i = 1; i <= n; i++)
+	for (ll i = 1; i < n+5; i++)
 		fact[i] = (fact[i - 1] % m * i % m) % m;
 }
 
@@ -57,7 +57,7 @@ int main() {
 
 	ll t, N;
 	t = 1;
-	N = 1e3;
+	N = 1e5;
 	pre(N, mod);
 	//cin >> t;
 	while (t--)
