@@ -5,7 +5,7 @@ void pre(ll n, ll m)
 	fact[0] = 1;
 
 	for (ll i = 1; i <= n; i++)
-		fact[i] = (fact[i] % m * i % m) % m;
+		fact[i] = (fact[i - 1] % m * i % m) % m;
 }
 
 ll pow(ll a, ll n, ll m)
@@ -14,10 +14,15 @@ ll pow(ll a, ll n, ll m)
 	while (n)
 	{
 		if (n % 2)
+		{
 			ans = (ans % m * a % m);
-
-		a = (a % m * a % m) % m;
-		n = n / 2;
+			n--;
+		}
+		else
+		{
+			a = (a % m * a % m) % m;
+			n = n / 2;
+		}
 	}
 	return ans;
 }
@@ -35,6 +40,14 @@ ll ncr(ll n, ll r, ll m)
 	return (fact[n] % m * modinv(fact[n - r]) % m * modinv(fact[r]) % m) % m;
 }
 
+ll npr(ll n, ll r, ll m)
+{
+	if (r > n)
+		return 0;
+
+	return (fact[n] % m * modinv(fact[n - r]) % m) % m;
+}
+
 int main() {
 	fastio;
 #ifndef ONLINE_JUDGE
@@ -44,9 +57,9 @@ int main() {
 
 	ll t, N;
 	t = 1;
-	N = 1e5;
+	N = 1e3;
 	pre(N, mod);
-	cin >> t;
+	//cin >> t;
 	while (t--)
 	{
 		solve();
