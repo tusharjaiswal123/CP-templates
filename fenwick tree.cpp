@@ -14,7 +14,7 @@ struct FenwickTree {
 	{
 		ll i;
 		for (i = 0; i < a.size(); i++)
-			add(i, a[i]);
+			update(i, a[i]);
 	}
 
 
@@ -34,7 +34,7 @@ struct FenwickTree {
 		return query(r) - query(l - 1);
 	}
 
-	void add(ll idx, ll delta) {
+	void update(ll idx, ll delta) {
 		for (; idx < n; idx = idx | (idx + 1))
 			bit[idx] += delta;
 	}
