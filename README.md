@@ -9,3 +9,7 @@
 ## Segment Tree
 - [First](https://github.com/tusharjaiswal123/CP-templates/blob/main/SegmentTree.cpp)
 - [Lazy Propagation](https://github.com/tusharjaiswal123/CP-templates/blob/main/lazy_propagation.cpp)
+
+
+## Fenwick Tree
+- [fenwick](https://github.com/tusharjaiswal123/CP-templates/blob/main/fenwick%20tree.cpp)
