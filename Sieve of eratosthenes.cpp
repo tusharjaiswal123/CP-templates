@@ -1,10 +1,10 @@
 vector<ll> primes;
 vector<bool> prime;
-void Sieve(ll n)
+void sieve(ll n)
 {
 	prime.assign(n + 5, 1);
 	prime[1] = false;
-	for (ll i = 2; i<= n; i++)
+	for (ll i = 2; i <= n; i++)
 	{
 		if (prime[i])
 		{
@@ -24,13 +24,14 @@ int main() {
 	freopen("output.txt", "w", stdout);
 #endif
 
-	ll t,N;
+	ll t, N;
 	t = 1;
-  N=1e5;
-  sieve(N);
-	cin >> t;
-	while (t--)
+	N = 1e5;
+	sieve(N);
+	//cin >> t;
+	for (ll test = 1; test <= t; test++)
 	{
+		//cout << "Case #" << test << ": ";
 		solve();
 	}
 	return 0;
