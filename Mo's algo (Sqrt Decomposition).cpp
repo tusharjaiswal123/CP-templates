@@ -53,6 +53,9 @@ int main() {
 	return 0;
 }
 
+ll a[300005];
+ll cur_l, cur_r;
+query queries[300005];
 ll cost2freq[1000005];
 ll cost;
 
@@ -88,27 +91,28 @@ void Remove(ll x)
 	cost = cost - x * f * f + (f - 1) * (f - 1) * x;
 }
 
-void adjust(ll &cur_l, ll &cur_r, query &q, ll a[])
+void adjust(ll i)
 {
-	while (cur_l < q.L)
-	{
-		Remove(a[cur_l]);
-		cur_l++;
-	}
 
-	while (cur_l > q.L)
+	while (cur_l > queries[i].L)
 	{
 		cur_l--;
 		Add(a[cur_l]);
 	}
 
-	while (cur_r < q.R)
+	while (cur_r < queries[i].R)
 	{
 		cur_r++;
 		Add(a[cur_r]);
 	}
 
-	while (cur_r > q.R)
+	while (cur_l < queries[i].L)
+	{
+		Remove(a[cur_l]);
+		cur_l++;
+	}
+
+	while (cur_r > queries[i].R)
 	{
 		Remove(a[cur_r]);
 		cur_r--;
@@ -120,10 +124,7 @@ inline void solve()
 	ll n, sn, q, i, l, r;
 	cin >> n >> q;
 
-	
 	sn = (ll)sqrt(n);
-	ll a[n];
-	vector<query> queries(q);
 	vector<ll> ans(q);
 
 	for (i = 0; i < n; i++)
@@ -141,7 +142,7 @@ inline void solve()
 		queries[i].block_no = (l + 1) / sn;
 	}
 
-	sort(queries.begin(), queries.end());
+	sort(queries, queries + q);
 
 	ll cur_l = queries[0].L;
 	ll cur_r = queries[0].R;
@@ -156,7 +157,7 @@ inline void solve()
 
 	for (i = 1; i < q; i++)
 	{
-		adjust(cur_l, cur_r, queries[i], a);
+		adjust(i);
 		ans[queries[i].q_no] = cost;
 	}
 
