@@ -53,7 +53,7 @@ int main() {
 	return 0;
 }
 
-map<ll, ll> cost2freq;
+ll cost2freq[1000005];
 ll cost;
 
 struct query {
@@ -98,7 +98,7 @@ void adjust(ll &cur_l, ll &cur_r, query &q, ll a[])
 
 	while (cur_l > q.L)
 	{
-		cur_l++;
+		cur_l--;
 		Add(a[cur_l]);
 	}
 
@@ -120,8 +120,8 @@ inline void solve()
 	ll n, sn, q, i, l, r;
 	cin >> n >> q;
 
-	cost2freq.clear();
-	sn = sqrt(n);
+	
+	sn = (ll)sqrt(n);
 	ll a[n];
 	vector<query> queries(q);
 	vector<ll> ans(q);
@@ -165,4 +165,5 @@ inline void solve()
 		cout << k << endl;
 
 }
+
 
