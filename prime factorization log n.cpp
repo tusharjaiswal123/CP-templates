@@ -1,15 +1,22 @@
 vector<ll> spf;
 
-vector<ll> factorize(ll x)
+vector<pair<ll, ll>> factorize(ll x)
 {
-	vector<ll> ans;
+	vector<pair<ll, ll>> ans;
+	ll p, e;
 
 	while (x > 1)
 	{
-		ans.pb(spf[x]);
-		x = x / spf[x];
-	}
+		p = spf[x];
+		e = 0;
 
+		while (x % p == 0)
+		{
+			x = x / p;
+			e++;
+		}
+		ans.pb({p, e});
+	}
 	return ans;
 }
 
@@ -36,4 +43,26 @@ void sieve(ll n)
 			}
 		}
 	}
+}
+
+int main() {
+	fastio;
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+
+	ll t;
+	t = 1;
+
+
+	ll N = 1e7;
+	sieve(N);
+	//cin >> t;
+	for (ll test = 1; test <= t; test++)
+	{
+		//cout << "Case #" << test << ": ";
+		solve();
+	}
+	return 0;
 }
