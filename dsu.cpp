@@ -32,10 +32,10 @@ struct dsu
 			par[p1] = p2;
 			r[p2] += r[p1];
 
-			return false;
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 };
