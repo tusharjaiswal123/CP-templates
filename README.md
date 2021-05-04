@@ -16,5 +16,8 @@
 - [fenwick](https://github.com/tusharjaiswal123/CP-templates/blob/main/fenwick%20tree.cpp)
 
 
+## DSU
+- [temp](https://github.com/tusharjaiswal123/CP-templates/blob/main/dsu.cpp)
+
 ## Mo's Algorithm
 - [mo](https://github.com/tusharjaiswal123/CP-templates/blob/main/Mo's%20algo%20(Sqrt%20Decomposition).cpp)
