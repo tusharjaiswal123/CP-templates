@@ -21,3 +21,6 @@
 
 ## Mo's Algorithm
 - [mo](https://github.com/tusharjaiswal123/CP-templates/blob/main/Mo's%20algo%20(Sqrt%20Decomposition).cpp)
+
+## LCA
+- [LCA](https://github.com/tusharjaiswal123/CP-templates/blob/main/LCA.cpp)
