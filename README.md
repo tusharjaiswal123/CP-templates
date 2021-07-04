@@ -24,3 +24,6 @@
 
 ## LCA
 - [LCA](https://github.com/tusharjaiswal123/CP-templates/blob/main/LCA.cpp)
+
+## Graph
+- [SCC](https://github.com/tusharjaiswal123/CP-templates/blob/main/SCC.cpp)
