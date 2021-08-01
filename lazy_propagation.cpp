@@ -1,93 +1,49 @@
 typedef ll item;
 
-// struct item {
-// 	ll seg, pref, suf, sum;
-// };
+/*struct item {
+	ll a,b
+};*/
 
 struct segtree
 {
 	vector<ll> operations;
 	vector<item> node;
+	vector<bool> lazy;
 	ll size;
-	item NEUTRAL_ELEMENT = {0, 0, 0, 0};
-	ll NO_OPERATION = LLONG_MAX - 1;
+	ll NEUTRAL_ELEMENT = 0;
 
-
-	item mul_op(item a, ll b, ll len)
+	item merge(item a, item b)
 	{
-		if (b == NO_OPERATION)
-			return a;
+		return a + b;
+	}
 
-		a.sum = b * len;
-		if (b > 0)
+	item single(ll v)
+	{
+		return v;
+	}
+
+	void build(vll &a, ll i, ll l, ll h)
+	{
+		if (h - l == 1)
 		{
-			a.seg = a.pref = a.suf = b * len;
-		}
-		else
-		{
-			a.seg = a.pref = a.suf = 0;
-		}
-
-		return a;
-	}
-
-	item add_op(item a, item b)
-	{
-		return {
-			max({a.seg, b.seg, a.suf + b.pref}),
-			max(a.sum + b.pref, a.pref),
-			max(b.suf, b.sum + a.suf),
-			a.sum + b.sum
-		};
-	}
-
-	void apply_mod_op(item &a, ll b, ll len)
-	{
-		a = mul_op(a, b, len);
-	}
-
-	ll on_op(ll a, ll b, ll len)
-	{
-		if (b == NO_OPERATION)
-			return a;
-
-		return b * len;
-	}
-
-	void apply_on_op(ll &a, ll b, ll len)
-	{
-		a = on_op(a, b, len);
-	}
-
-	void propagate(ll i, ll lx, ll rx)
-	{
-		if (rx - lx == 1)
-			return;
-
-		ll m = lx + (rx - lx) / 2;
-
-		apply_on_op(operations[2 * i + 1], operations[i], 1LL);
-		apply_on_op(operations[2 * i + 2], operations[i], 1LL);
-		apply_mod_op(node[2 * i + 1], operations[i], m - lx);
-		apply_mod_op(node[2 * i + 2], operations[i], rx - m);
-
-		operations[i] = NO_OPERATION;
-	}
-
-	void build(ll i, ll lx, ll rx)
-	{
-		if (rx - lx == 1)
-		{
-			node[i] = 1;
+			if (l < a.size())
+			{
+				node[i] = single(a[l]);
+			}
 			return;
 		}
 
-		ll m = lx + (rx - lx) / 2;
+		ll m = l + (h - l) / 2;
 
-		build(2 * i + 1, lx, m);
-		build(2 * i + 2, m, rx);
+		build(a, 2 * i + 1, l, m);
+		build(a, 2 * i + 2, m, h);
 
-		node[i] = add_op(node[2 * i + 1] , node[2 * i + 2]);
+		node[i] = merge(node[2 * i + 1], node[2 * i + 2]);
+	}
+
+	void build(vll &a)
+	{
+		build(a, 0, 0, size);
 	}
 
 	void init(ll n)
@@ -97,60 +53,82 @@ struct segtree
 			size *= 2;
 
 		operations.assign(2 * size, 0);
-		node.assign(2 * size, NEUTRAL_ELEMENT);
-
-		//build(0, 0, size);
+		node.assign(2 * size, 0);
+		lazy.assign(2 * size, false);
 	}
 
-	item get(ll l, ll r, ll i, ll lx, ll rx)
+	void apply(ll i, ll lx, ll rx, ll v)
 	{
-		propagate(i, lx, rx);
+		node[i] += v * (rx - lx);
+
+		if (rx - lx == 1)
+			return;
+
+		lazy[i] = true;
+		operations[i] += v;
+	}
+
+
+	void propagate(ll i, ll lx, ll rx)
+	{
+		if (lazy[i])
+		{
+			lazy[i] = false;
+
+			ll m = lx + (rx - lx) / 2;
+			apply(2 * i + 1, lx, m, operations[i]);
+			apply(2 * i + 2, m, rx, operations[i]);
+
+			operations[i] = 0;
+		}
+	}
+
+
+	ll query(ll l, ll r, ll i, ll lx, ll rx)
+	{
 		if (lx >= r || l >= rx)
 			return NEUTRAL_ELEMENT;
 
 		if (lx >= l && rx <= r)
-		{
 			return node[i];
-		}
 
+		propagate(i, lx, rx);
 		ll m = lx + (rx - lx) / 2;
 
-		item m1 = get(l, r, 2 * i + 1, lx, m);
-		item m2 = get(l, r, 2 * i + 2, m, rx);
+		ll m1 = query(l, r, 2 * i + 1, lx, m);
+		ll m2 = query(l, r, 2 * i + 2, m, rx);
 
-		return add_op(m1 , m2);
+		return merge(m1 , m2);
 	}
 
-	item get(ll l, ll r)
+	ll query(ll l, ll r)
 	{
-		return get(l, r, 0, 0, size);
+		return query(l, r, 0, 0, size);
 	}
 
-	void add(ll l, ll r, ll v, ll i, ll lx, ll rx)
+	void rupd(ll l, ll r, ll v, ll i, ll lx, ll rx)
 	{
-		propagate(i, lx, rx);
 		if (lx >= r || l >= rx)
 			return;
 
 		if (lx >= l && rx <= r)
 		{
-			apply_on_op(operations[i], v, 1);
-			apply_mod_op(node[i], v, rx - lx);
+			apply(i, lx, rx, v);
 			return;
 		}
 
+		propagate(i, lx, rx);
 		ll m = lx + (rx - lx) / 2;
 
-		add(l, r, v, 2 * i + 1, lx, m);
-		add(l, r, v, 2 * i + 2, m, rx);
+		rupd(l, r, v, 2 * i + 1, lx, m);
+		rupd(l, r, v, 2 * i + 2, m, rx);
 
-		node[i] = add_op(node[2 * i + 1] , node[2 * i + 2]);
+		node[i] = merge(node[2 * i + 1] , node[2 * i + 2]);
 	}
 
-	void add(ll l, ll r, ll v)
+	void rupd(ll l, ll r, ll v)
 	{
-		return add(l, r, v, 0, 0, size);
+		return rupd(l, r, v, 0, 0, size);
 	}
-
 
 };
