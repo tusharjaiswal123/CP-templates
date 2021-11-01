@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define deb(x) cerr<<#x<<"  = "<<x<<endl;
+#define deb2(x,y) cerr<<#x<<" = "<<x<<"  "<<#y<<" = "<<y<<endl;
+#define print(x) for (auto k:x) cout<<k<<" ";cout<<endl;
+#define debmp(x) for(auto k:x) cout<<k.first<<" "<<k.second<<endl;
+#define ll long long
+#define lld long double
+#define mod1 1000000007
+#define mod2 998244353
+#define ff first
+#define ss second
+#define pb push_back
+#define inf 1e18
+#define endl "\n"
+typedef vector<vector<ll>> vvll;
+typedef vector<ll> vll;
+typedef vector<pair<ll, ll>> vpll;
+typedef pair<ll, ll> pll;
+typedef vector<bool> vb;
+
+ll mod = mod1;
+
+mt19937 rng = mt19937(chrono::steady_clock::now().time_since_epoch().count());
+string to_str(ll n) {string ans = ""; while (n) {ans += (n % 10 + '0'); n = n / 10;} reverse(ans.begin(), ans.end()); return ans;}
+ll add(ll a, ll b) {a = a % mod; b = b % mod; return ((a + b) % mod + mod) % mod;}
+ll sub(ll a, ll b) {a = a % mod; b = b % mod; return ((a - b) % mod + mod) % mod;}
+ll mul(ll a, ll b) {a = a % mod; b = b % mod; return ((1ll * a * b) % mod + mod) % mod;}
+ll expo(ll a, ll n) {ll ans = 1; a = a % mod; while (n) {if (n % 2) {ans = ((ans % mod) * (a % mod)) % mod; n--;} else {a = ((a % mod) * (a % mod)) % mod; n = n / 2;}} return ans;}
+ll dv(ll a, ll b) {a = a % mod; b = b % mod; return (a * expo(b, mod - 2)) % mod;}
+ll pw(ll a, ll n) {ll ans = 1; while (n) {if (n % 2) {ans = ans * a; n--;} else {a = a * a; n = n / 2;}} return ans;}
+ll modinv(ll a) {return expo(a, mod - 2);}
+ll getRandomNumber(ll l, ll r) {uniform_int_distribution<ll> dist(l, r); return dist(rng);}
+ll gcd(ll a, ll b) {while (b) {a %= b; swap(a, b);} return a;}
+ll lcm(ll a, ll b) {return (a * b) / gcd(a, b);}
+
+void solve();
+
+int main() {
+	fastio;
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+
+	ll t;
+	t = 1;
+
+	//cin >> t;
+	for (ll test = 1; test <= t; test++)
+	{
+		//cout << "Case #" << test << ": ";
+		solve();
+	}
+	return 0;
+}
+
+const ll N = 200005;
+
+inline void solve()
+{
+    
+}
