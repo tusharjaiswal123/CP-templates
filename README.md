@@ -27,3 +27,6 @@
 
 ## Graph
 - [SCC](https://github.com/tusharjaiswal123/CP-templates/blob/main/SCC.cpp)
+
+## PBDS
+- [pbds](https://github.com/tusharjaiswal123/CP-templates/blob/main/pbds.cpp)
