@@ -7,7 +7,7 @@ using namespace __gnu_pbds;
 
 //1. using it as ordered set
 typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
-// *find_by_order(kth)
+// *find_by_order(k-1th) 
 // order_of_key(val)
 // any.erase(val)
 
