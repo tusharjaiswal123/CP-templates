@@ -1,16 +1,23 @@
 #include<bits/stdc++.h>
+
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+
 using namespace std;
+using namespace __gnu_pbds;
 
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
+typedef tree<long long, null_type, greater_equal<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 #define fastio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 #define deb(x) cerr<<#x<<"  = "<<x<<endl;
 #define deb2(x,y) cerr<<#x<<" = "<<x<<"  "<<#y<<" = "<<y<<endl;
+#define deb3(x,y,z) cerr<<#x<<" = "<<x<<"  "<<#y<<" = "<<y<<"  "<<#z<<" = "<<z<<endl;
 #define print(x) for (auto k:x) cout<<k<<" ";cout<<endl;
 #define debmp(x) for(auto k:x) cout<<k.first<<" "<<k.second<<endl;
 #define ll long long
-#define lld long double
+#define ld long double
 #define mod1 1000000007
 #define mod2 998244353
 #define ff first
