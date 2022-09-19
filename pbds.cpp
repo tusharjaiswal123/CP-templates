@@ -6,13 +6,14 @@ using namespace __gnu_pbds;
 
 
 //1. using it as ordered set
-typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
-// find_by_order, order_of_key
+typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
+// *find_by_order(kth)
+// order_of_key(val)
 // any.erase(val)
 
 
 //2.using it as ordered multiset
-typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
+typedef tree<long long, null_type, less_equal<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
 // Some points to take care for ordered multiset
 
