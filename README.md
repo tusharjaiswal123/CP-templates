@@ -3,7 +3,7 @@
 ## Number Theory
 - [Sieve](https://github.com/tusharjaiswal123/CP-templates/blob/main/Sieve%20of%20eratosthenes.cpp)
 - [Factorization logn](https://github.com/tusharjaiswal123/CP-templates/blob/main/prime%20factorization%20log%20n.cpp)
-- [ncr,npr](https://github.com/tusharjaiswal123/CP-templates/blob/main/ncr(pow%2Cinvmod).cpp)
+- [ncr,npr](https://github.com/tusharjaiswal123/CP-templates/blob/main/nCr,%20nPr.cpp)
 - [Modinverse](https://github.com/tusharjaiswal123/CP-templates/blob/main/Modinv(extended%20euclid's).cpp)
 - [Mod inverse for range of numbers or all numbers of array](https://github.com/tusharjaiswal123/CP-templates/blob/main/Modulo%20Inverse%20for%20N%20numbers.cpp)
 
