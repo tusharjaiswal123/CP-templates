@@ -1,3 +1,22 @@
+// nCr using pascal's triangle for n upto 1005 and r upto 1005
+
+ll dp[1005][1005];
+
+void preCalc()
+{
+	memset(dp, -1, sizeof dp);
+
+	for (int i = 1; i < 1005; i++)
+	{
+		dp[i][1] = i;
+		dp[i][i] = 1;
+
+		for (int j = 2; j < i; j++)
+			dp[i][j] = add(dp[i - 1][j - 1], dp[i - 1][j]);
+	}
+}
+
+
 vector<ll> FACT;
 
 void preFactModulo(ll n) 
