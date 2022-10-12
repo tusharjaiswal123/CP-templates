@@ -7,7 +7,8 @@ void preCalc()
 	memset(dp, -1, sizeof dp);
 
 	for (int i = 1; i < 1005; i++)
-	{
+	{	
+		dp[i][0] = 1;
 		dp[i][1] = i;
 		dp[i][i] = 1;
 
