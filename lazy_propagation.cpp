@@ -100,7 +100,8 @@ struct segtree
 
 		return merge(m1 , m2);
 	}
-
+	
+	// l to r-1 0-based indexing
 	ll query(ll l, ll r)
 	{
 		return query(l, r, 0, 0, size);
@@ -125,7 +126,8 @@ struct segtree
 
 		node[i] = merge(node[2 * i + 1] , node[2 * i + 2]);
 	}
-
+	
+	// l to r-1 0-based indexing
 	void rupd(ll l, ll r, ll v)
 	{
 		return rupd(l, r, v, 0, 0, size);
