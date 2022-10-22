@@ -69,7 +69,8 @@ struct segtree {
 
 		node[i] = merge(node[2 * i + 1], node[2 * i + 2]);
 	}
-
+	
+	// 0-based indexing
 	void set(ll x, ll val)
 	{
 		set(x, val, 0, 0, size);
@@ -91,7 +92,8 @@ struct segtree {
 
 		return merge(s1, s2);
 	}
-
+	
+	// l to r-1 0-based index
 	item query(ll l, ll r)
 	{
 		return query(l, r, 0, 0, size);
